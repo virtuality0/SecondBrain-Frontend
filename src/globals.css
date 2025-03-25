@@ -3,10 +3,21 @@
 html,
 body {
   height: 100vh;
-  width: 100wh;
+  width: 100vw;
 }
 
 #root {
   height: 100%;
   width: 100%;
+}
+
+@theme {
+  --color-purple-600: #5046e3;
+  --color-purple-300: #e1e6ff;
+  --color-purple-400: #6865bf;
+  --color-offWhite: #f9f9fe;
+  --color-gray-600: #4e555e;
+  --color-black-600: #1e2c3b;
+  --color-white-600: #f9fbfc;
+  --color-gray-200: #e6e9ea;
 }
