@@ -1,6 +1,6 @@
 import { CrossIcon } from "../../icons/CrossIcon";
 import { Button } from "../ui/Button";
-import { Input } from "../ui/Input";
+import { LabelledInput } from "../ui/LabelledInput";
 
 interface CreateContentModalProps {
   open: boolean;
@@ -30,8 +30,8 @@ export const CreateContentModal = ({
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <Input placeholder="type" />
-              <Input placeholder="url" />
+              <LabelledInput placeholder="type" />
+              <LabelledInput placeholder="url" />
             </div>
             <div className="flex justify-center">
               <Button

@@ -7,6 +7,7 @@ export interface ButtonProps {
   frontIcon?: ReactNode;
   endIcon?: ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: "reset" | "button" | "submit" | undefined;
 }
 
 const variantStyles = {
@@ -29,10 +30,12 @@ export const Button = ({
   endIcon,
   frontIcon,
   size,
+  type,
 }: ButtonProps) => {
   return (
     <>
       <button
+        type={type ?? "button"}
         onClick={onClick}
         className={`${variantStyles[variant]} ${
           sizeStyles[size ?? "md"]

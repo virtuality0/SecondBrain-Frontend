@@ -1,14 +1,22 @@
 import { useState } from "react";
 import { Dashboard } from "./components/Dashboard";
 import { CreateContentModal } from "./components/modals/createContentModal";
-import { Sidebar } from "./components/sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Login } from "./components/login";
+import { Sidebar } from "./components/Sidebar";
+import { Signin } from "./components/Signin";
+import { Signup } from "./components/Signup";
+import { Bounce, ToastContainer } from "react-toastify";
 
 function App() {
   const [createContentModal, setCreateContentModal] = useState<boolean>(false);
   return (
     <BrowserRouter>
+      <ToastContainer
+        position={"top-right"}
+        transition={Bounce}
+        pauseOnHover={true}
+        autoClose={3000}
+      />
       <Routes>
         <Route
           path="/dashboard"
@@ -25,7 +33,8 @@ function App() {
             </div>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
