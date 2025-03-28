@@ -32,13 +32,7 @@ export const Dashboard = ({
           />
         </div>
       </div>
-      <div className="grow flex gap-4 flex-wrap">
-        <Card
-          title="First video"
-          url="https://x.com/bisswaaaa/status/1902353605132480665"
-          type="youtube"
-        />
-      </div>
+      <div className="grow flex gap-4 flex-wrap"></div>
     </div>
   );
 };

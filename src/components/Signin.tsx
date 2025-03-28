@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./ui/Button";
 import { LabelledInput } from "./ui/LabelledInput";
 import { ChangeEvent, useState } from "react";
@@ -19,6 +19,7 @@ export const Signin = () => {
       .then((response) => {
         toast(response.data.msg);
         localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
       })
       .catch((err) => {
         toast(err.response.data.msg);
@@ -28,6 +29,8 @@ export const Signin = () => {
     username: "",
     password: "",
   });
+
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center h-screen items-center">
       <form

@@ -1,6 +1,9 @@
+import { ChangeEvent, useState } from "react";
 import { CrossIcon } from "../../icons/CrossIcon";
+import { axiosApi } from "../../utils/axiosConfig";
 import { Button } from "../ui/Button";
 import { LabelledInput } from "../ui/LabelledInput";
+import { toast } from "react-toastify";
 
 interface CreateContentModalProps {
   open: boolean;
@@ -11,9 +14,34 @@ export const CreateContentModal = ({
   onClose,
 }: CreateContentModalProps) => {
   const onSubmitClickHandler = async () => {
-    try {
-    } catch (err) {}
+    axiosApi
+      .post(
+        "content/add",
+        {
+          title: addContentForm.title,
+          type: addContentForm.type,
+          link: addContentForm.url,
+          tags: [],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // JWT token of the currently logged in user
+          },
+        }
+      )
+      .then((response) => {
+        toast(response.data.msg);
+      })
+      .catch((err) => {
+        toast(err.response.body.msg);
+      });
   };
+  const [addContentForm, setAddContentForm] = useState({
+    title: "",
+    url: "",
+    type: "",
+  });
+
   return (
     <>
       {open && (
@@ -29,17 +57,45 @@ export const CreateContentModal = ({
                 frontIcon={<CrossIcon size="md" strokeWidth={2.5} />}
               />
             </div>
-            <div className="flex flex-col gap-y-2">
-              <LabelledInput placeholder="type" />
-              <LabelledInput placeholder="url" />
-            </div>
-            <div className="flex justify-center">
-              <Button
-                onClick={onSubmitClickHandler}
-                variant="primary"
-                text="Submit"
-              />
-            </div>
+            <form action={onSubmitClickHandler}>
+              <div className="flex flex-col gap-y-4">
+                <div className="flex flex-col gap-y-4">
+                  <LabelledInput
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setAddContentForm({
+                        ...addContentForm,
+                        type: e.target.value,
+                      });
+                    }}
+                    value={addContentForm.type}
+                    placeholder="type"
+                  />
+                  <LabelledInput
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setAddContentForm({
+                        ...addContentForm,
+                        url: e.target.value,
+                      });
+                    }}
+                    value={addContentForm.url}
+                    placeholder="url"
+                  />
+                  <LabelledInput
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setAddContentForm({
+                        ...addContentForm,
+                        title: e.target.value,
+                      });
+                    }}
+                    value={addContentForm.title}
+                    placeholder="title"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <Button type="submit" variant="primary" text="Submit" />
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       )}
