@@ -7,7 +7,7 @@ interface SidebarItemComponentProps {
 
 export const SidebarItem = ({ icon, text }: SidebarItemComponentProps) => {
   return (
-    <div className="flex gap-x-4 px-8">
+    <div className="flex gap-x-4 px-8 cursor-pointer">
       {icon}
       <span className="text-gray-400 text-xl">{text}</span>
     </div>

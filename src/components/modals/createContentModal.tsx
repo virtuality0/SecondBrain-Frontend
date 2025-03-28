@@ -31,6 +31,7 @@ export const CreateContentModal = ({
       )
       .then((response) => {
         toast(response.data.msg);
+        onClose();
       })
       .catch((err) => {
         toast(err.response.body.msg);

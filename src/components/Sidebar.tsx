@@ -6,7 +6,7 @@ import twitterIcon from "../assets/images/twitterIcon.svg";
 
 export const Sidebar = () => {
   return (
-    <div className="flex flex-col gap-y-10 w-[20%] h-full bg-white">
+    <div className="flex flex-col gap-y-10 w-[25%] h-full bg-white">
       <div className="flex gap-x-2 items-center px-2 py-2">
         <img className="w-[20%]" src={brainIcon} alt="Brainly logo" />
         <h1 className="text-2xl font-semibold grow">Second Brain</h1>
