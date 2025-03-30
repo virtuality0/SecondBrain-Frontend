@@ -4,4 +4,5 @@ export type Content = {
   link: string;
   tags: string[];
   title: string;
+  createdAt: string;
 };

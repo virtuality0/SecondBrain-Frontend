@@ -8,6 +8,7 @@ export interface ButtonProps {
   endIcon?: ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "reset" | "button" | "submit" | undefined;
+  grow?: boolean;
 }
 
 const variantStyles = {
@@ -21,7 +22,7 @@ const sizeStyles = {
   lg: "py-3 px-6",
 };
 
-const defaultStyles = "rounded-md";
+const defaultStyles = "rounded-md flex justify-center items-center gap-x-2";
 
 export const Button = ({
   variant,
@@ -31,6 +32,7 @@ export const Button = ({
   frontIcon,
   size,
   type,
+  grow,
 }: ButtonProps) => {
   return (
     <>
@@ -39,10 +41,10 @@ export const Button = ({
         onClick={onClick}
         className={`${variantStyles[variant]} ${
           sizeStyles[size ?? "md"]
-        } ${defaultStyles} flex items-center gap-x-3 font-light cursor-pointer`}
+        } ${defaultStyles} font-light cursor-pointer ${grow ? "grow" : ""}`}
       >
         {frontIcon ?? null}
-        {text}
+        <span>{text}</span>
         {endIcon ?? null}
       </button>
     </>

@@ -28,12 +28,12 @@ export const Signup = () => {
     password: "",
   });
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-purple-300">
       <form
         action={onSubmitHandler}
         className="size-full flex justify-center items-center"
       >
-        <div className="border-2 border-gray-200 w-[25%] rounded-md px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
+        <div className="border-2 border-gray-200 w-[25%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
           <div className="flex flex-col items-center">
             <h1 className="text-purple-600 text-2xl font-semibold">Hello</h1>
             <p className="text-sm">Create your account</p>
@@ -56,7 +56,7 @@ export const Signup = () => {
             />
           </div>
           <div className="flex justify-center">
-            <Button type="submit" variant="primary" text="Submit" />
+            <Button type="submit" variant="primary" text="SignUp" grow={true} />
           </div>
           <div className="flex gap-x-2 items-center justify-center">
             <p className="text-sm">Already have an account ?</p>

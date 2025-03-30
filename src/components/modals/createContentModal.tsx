@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 interface CreateContentModalProps {
   open: boolean;
   onClose: () => void;
+  setCreateContentSubmitClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const CreateContentModal = ({
   open,
   onClose,
+  setCreateContentSubmitClicked,
 }: CreateContentModalProps) => {
   const onSubmitClickHandler = async () => {
     axiosApi
@@ -32,6 +34,7 @@ export const CreateContentModal = ({
       .then((response) => {
         toast(response.data.msg);
         onClose();
+        setCreateContentSubmitClicked((prev) => !prev);
       })
       .catch((err) => {
         toast(err.response.body.msg);
@@ -93,7 +96,12 @@ export const CreateContentModal = ({
                   />
                 </div>
                 <div className="flex justify-center">
-                  <Button type="submit" variant="primary" text="Submit" />
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    text="Submit"
+                    grow={true}
+                  />
                 </div>
               </div>
             </form>

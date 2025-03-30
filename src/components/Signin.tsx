@@ -19,11 +19,11 @@ export const Signin = () => {
       .then((response) => {
         toast(response.data.msg);
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
       })
       .catch((err) => {
         toast(err.response.data.msg);
       });
+    navigate("/dashboard");
   };
   const [signinForm, setSignupForm] = useState<signinFormType>({
     username: "",
@@ -32,12 +32,12 @@ export const Signin = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="flex justify-center h-screen items-center">
+    <div className="flex justify-center h-screen items-center bg-purple-300">
       <form
         action={onSubmitHandler}
         className="size-full flex justify-center items-center"
       >
-        <div className="border-2 border-gray-200 w-[25%] rounded-md px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
+        <div className="border-2 border-gray-200 w-[25%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
           <div className="flex flex-col items-center">
             <h1 className="text-purple-600 text-2xl font-semibold">Hello</h1>
             <p className="text-sm">Sign in to your account</p>
@@ -60,7 +60,7 @@ export const Signin = () => {
             />
           </div>
           <div className="flex justify-center">
-            <Button type="submit" variant="primary" text="Submit" />
+            <Button type="submit" variant="primary" text="SignIn" grow={true} />
           </div>
           <div className="flex gap-x-2 items-center justify-center">
             <p className="text-sm">Don't have an account ?</p>

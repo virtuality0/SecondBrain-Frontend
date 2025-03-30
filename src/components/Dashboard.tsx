@@ -5,14 +5,22 @@ import { Button } from "./ui/Button";
 import { Card } from "./ui/Card";
 import { axiosApi } from "../utils/axiosConfig";
 import { Content } from "../types/content";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface DashboardComponentProps {
   setCreateContentModal: (createContentModal: boolean) => void;
+  setShareBrainModal: (shareBrainModal: boolean) => void;
+  createContentSubmitClicked: boolean;
 }
 
 export const Dashboard = ({
   setCreateContentModal,
+  setShareBrainModal,
+  createContentSubmitClicked,
 }: DashboardComponentProps) => {
+  const navigate = useNavigate();
+  const [deletecardClicked, setDeleteCardClicked] = useState(false);
   const fetchContent = async () => {
     const response = await axiosApi.get<{ content: Content[] }>(
       "/content/getAll",
@@ -22,14 +30,24 @@ export const Dashboard = ({
         },
       }
     );
+    localStorage.setItem(
+      "contentLength",
+      response.data.content.length.toString()
+    );
 
     return response.data;
   };
 
   const { data, error } = useQuery({
-    queryKey: ["content"],
+    queryKey: ["content", deletecardClicked, createContentSubmitClicked],
     queryFn: fetchContent,
   });
+
+  const signoutClickHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("brainHash");
+    navigate("/signin");
+  };
 
   return (
     <div className="flex flex-col px-6 py-6 gap-y-8 grow bg-white-600 border-l-2 border-l-gray-200 h-full">
@@ -37,6 +55,9 @@ export const Dashboard = ({
         <h1 className="text-3xl font-medium">All Notes</h1>
         <div className="flex gap-x-4">
           <Button
+            onClick={() => {
+              setShareBrainModal(true);
+            }}
             variant="secondary"
             size="sm"
             text="Share Brain"
@@ -51,6 +72,11 @@ export const Dashboard = ({
             text="Add Content"
             frontIcon={<AddIcon size="md" strokeWidth={2.0} />}
           />
+          <Button
+            onClick={signoutClickHandler}
+            variant="primary"
+            text="SignOut"
+          />
         </div>
       </div>
       {error && <div>Error fetching content.</div>}
@@ -62,6 +88,9 @@ export const Dashboard = ({
               title={item.title}
               url={item.link}
               type={item.type}
+              setDeleteCardClicked={setDeleteCardClicked}
+              contentId={item._id}
+              createdAt={item.createdAt}
             />
           );
         })}
