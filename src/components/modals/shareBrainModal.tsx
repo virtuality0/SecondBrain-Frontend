@@ -3,15 +3,21 @@ import { Button } from "../ui/Button";
 import { Square } from "../../icons/Square";
 import { axiosApi } from "../../utils/axiosConfig";
 import { toast } from "react-toastify";
-import { useRef } from "react";
+import { Clipboard } from "../../icons/Clipboard";
 
 interface ShareBrainModalProps {
   open: boolean;
   onClose: () => void;
+  brainHashReceived: boolean;
+  setBrainHashReceived: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ShareBrainModal = ({ open, onClose }: ShareBrainModalProps) => {
-  const brainHashReceived = useRef(false);
+export const ShareBrainModal = ({
+  open,
+  onClose,
+  brainHashReceived,
+  setBrainHashReceived,
+}: ShareBrainModalProps) => {
   const onClickHandler = () => {
     axiosApi
       .post<{ hash: string }>(
@@ -32,15 +38,22 @@ export const ShareBrainModal = ({ open, onClose }: ShareBrainModalProps) => {
       .catch((err) => {
         toast(err.response.body.msg);
       });
-    brainHashReceived.current = true;
+    setBrainHashReceived(true);
   };
+
+  const onClickClipboardHandler = () => {
+    navigator.clipboard.writeText(localStorage.getItem("brainHash") ?? "");
+  };
+
   return (
     <>
       {open && (
-        <div className="fixed w-screen h-screen bg-slate-500 opacity-90 flex items-center justify-center">
-          <div className="flex flex-col gap-y-4 w-[35%] min-h-[30%] bg-white rounded-md">
+        <div className="fixed w-screen h-screen bg-[rgba(100,116,139,0.9)] flex items-center justify-center">
+          <div className="flex flex-col gap-y-4 md:w-[35%] w-[90%] min-h-[30%] bg-white rounded-md">
             <div className="flex justify-between px-4 py-2 items-center">
-              <h1 className="text-2xl">Share your brain</h1>
+              <h1 className="text-2xl">
+                {brainHashReceived ? "Link to your brain" : "Share your brain"}
+              </h1>
               <Button
                 onClick={onClose}
                 frontIcon={<CrossIcon size="md" />}
@@ -74,13 +87,18 @@ export const ShareBrainModal = ({ open, onClose }: ShareBrainModalProps) => {
                 </div>
               </>
             ) : (
-              <div className="flex flex-col items-center justify-center text-gray-400 text-lg">
-                <p>
-                  Here is the link to your brain, you can share it with others
-                </p>
-                <p className="break-words block">
+              <div className="flex flex-col justify-center text-gray-400 text-lg px-2 py-2">
+                <code className="break-words block text-purple-600">
                   {localStorage.getItem("brainHash")}
-                </p>
+                </code>
+                <div
+                  onClick={() => {
+                    onClickClipboardHandler();
+                  }}
+                  className="flex justify-center px-2 py-2"
+                >
+                  <Clipboard strokeWidth={2.0} size="lg" />
+                </div>
               </div>
             )}
           </div>

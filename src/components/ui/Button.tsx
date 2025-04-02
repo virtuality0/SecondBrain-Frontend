@@ -22,7 +22,7 @@ const sizeStyles = {
   lg: "py-3 px-6",
 };
 
-const defaultStyles = "rounded-md flex justify-center items-center gap-x-2";
+const defaultStyles = `rounded-md flex justify-center items-center`;
 
 export const Button = ({
   variant,
@@ -41,10 +41,11 @@ export const Button = ({
         onClick={onClick}
         className={`${variantStyles[variant]} ${
           sizeStyles[size ?? "md"]
-        } ${defaultStyles} font-light cursor-pointer ${grow ? "grow" : ""}`}
+        } ${defaultStyles} font-light cursor-pointer
+        } ${grow ? "grow" : ""}`}
       >
         {frontIcon ?? null}
-        <span>{text}</span>
+        <span className={`${text && "px-2"}`}>{text}</span>
         {endIcon ?? null}
       </button>
     </>

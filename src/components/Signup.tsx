@@ -33,10 +33,10 @@ export const Signup = () => {
         action={onSubmitHandler}
         className="size-full flex justify-center items-center"
       >
-        <div className="border-2 border-gray-200 w-[25%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
+        <div className="border-2 border-gray-200 md:w-[40%] w-[90%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
           <div className="flex flex-col items-center">
-            <h1 className="text-purple-600 text-2xl font-semibold">Hello</h1>
-            <p className="text-sm">Create your account</p>
+            <h1 className="text-purple-600 text-3xl font-semibold">Hello</h1>
+            <p className="text-lg">Create your account</p>
           </div>
           <div className="flex flex-col gap-y-6">
             <LabelledInput
@@ -55,14 +55,14 @@ export const Signup = () => {
               placeholder="password"
             />
           </div>
-          <div className="flex justify-center">
+          <div className="flex flex-col gap-y-4">
             <Button type="submit" variant="primary" text="SignUp" grow={true} />
-          </div>
-          <div className="flex gap-x-2 items-center justify-center">
-            <p className="text-sm">Already have an account ?</p>
-            <Link to="/signin">
-              <span className="text-purple-600 cursor-pointer">Signin</span>
-            </Link>
+            <div className="flex gap-x-2 items-center justify-center">
+              <p className="text-sm">Already have an account ?</p>
+              <Link to="/signin">
+                <span className="text-purple-600 cursor-pointer">Signin</span>
+              </Link>
+            </div>
           </div>
         </div>
       </form>

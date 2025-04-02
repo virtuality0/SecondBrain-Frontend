@@ -35,6 +35,11 @@ export const CreateContentModal = ({
         toast(response.data.msg);
         onClose();
         setCreateContentSubmitClicked((prev) => !prev);
+        setAddContentForm({
+          title: "",
+          url: "",
+          type: "",
+        });
       })
       .catch((err) => {
         toast(err.response.body.msg);
@@ -49,8 +54,8 @@ export const CreateContentModal = ({
   return (
     <>
       {open && (
-        <div className="fixed w-screen h-screen bg-slate-500 opacity-90 flex items-center justify-center">
-          <div className="bg-white p-4 rounded-md w-[25%] flex flex-col gap-y-6">
+        <div className="absolute w-screen h-screen bg-[rgba(100,116,139,0.9)] flex items-center justify-center">
+          <div className="bg-white p-4 rounded-md md:w-[25%] w-[90%] flex flex-col gap-y-6">
             <div className="flex justify-between items-center">
               <h1 className="text-black font-medium text-xl">Add Content</h1>
               <Button

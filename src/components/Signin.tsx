@@ -10,7 +10,7 @@ export const Signin = () => {
     username: string;
     password: string;
   };
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = () => {
     axiosApi
       .post<{ msg: string; token: string }>("/user/signin", {
         username: signinForm.username,
@@ -19,11 +19,13 @@ export const Signin = () => {
       .then((response) => {
         toast(response.data.msg);
         localStorage.setItem("token", response.data.token);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 500);
       })
       .catch((err) => {
-        toast(err.response.data.msg);
+        toast(err.response.body.msg);
       });
-    navigate("/dashboard");
   };
   const [signinForm, setSignupForm] = useState<signinFormType>({
     username: "",
@@ -37,10 +39,10 @@ export const Signin = () => {
         action={onSubmitHandler}
         className="size-full flex justify-center items-center"
       >
-        <div className="border-2 border-gray-200 w-[25%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite">
+        <div className="border-2 border-gray-200 md:w-[40%] w-[90%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite justify-around">
           <div className="flex flex-col items-center">
-            <h1 className="text-purple-600 text-2xl font-semibold">Hello</h1>
-            <p className="text-sm">Sign in to your account</p>
+            <h1 className="text-purple-600 text-3xl font-semibold">Hello</h1>
+            <p className="text-lg">Sign in to your account</p>
           </div>
           <div className="flex flex-col gap-y-6">
             <LabelledInput
@@ -59,14 +61,14 @@ export const Signin = () => {
               placeholder="password"
             />
           </div>
-          <div className="flex justify-center">
+          <div className="flex flex-col gap-y-4">
             <Button type="submit" variant="primary" text="SignIn" grow={true} />
-          </div>
-          <div className="flex gap-x-2 items-center justify-center">
-            <p className="text-sm">Don't have an account ?</p>
-            <Link to="/signup">
-              <span className="text-purple-600 cursor-pointer">Create</span>{" "}
-            </Link>
+            <div className="flex gap-x-2 items-center justify-center">
+              <p className="text-sm">Don't have an account ?</p>
+              <Link to="/signup">
+                <span className="text-purple-600 cursor-pointer">Create</span>{" "}
+              </Link>
+            </div>
           </div>
         </div>
       </form>
