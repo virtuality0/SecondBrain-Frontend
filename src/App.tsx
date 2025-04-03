@@ -4,8 +4,13 @@ import { Signin } from "./components/Signin";
 import { Signup } from "./components/Signup";
 import { Bounce, ToastContainer } from "react-toastify";
 import { LandingPage } from "./components/LandingPage";
+import { useState } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    localStorage.getItem("token") !== null
+  );
+
   return (
     <BrowserRouter>
       <ToastContainer
@@ -18,14 +23,17 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            localStorage.getItem("token") ? ( // to check if the user's logged in only then show the dashboard
+            isLoggedIn ? ( // to check if the user's logged in only then show the dashboard
               <Dashboard />
             ) : (
               <Navigate to="/signin" />
             )
           }
         />
-        <Route path="/signin" element={<Signin />} />
+        <Route
+          path="/signin"
+          element={<Signin setIsLoggedIn={setIsLoggedIn} />}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>

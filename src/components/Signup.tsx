@@ -48,6 +48,7 @@ export const Signup = () => {
             />
 
             <LabelledInput
+              type="password"
               value={signupForm.password}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setSignupForm({ ...signupForm, password: e.target.value });

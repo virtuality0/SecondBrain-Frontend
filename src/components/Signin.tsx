@@ -5,7 +5,13 @@ import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { axiosApi } from "../utils/axiosConfig";
 
-export const Signin = () => {
+interface SigninComponentProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Signin = ({ setIsLoggedIn }: SigninComponentProps) => {
+  const navigate = useNavigate();
+
   type signinFormType = {
     username: string;
     password: string;
@@ -19,9 +25,8 @@ export const Signin = () => {
       .then((response) => {
         toast(response.data.msg);
         localStorage.setItem("token", response.data.token);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 500);
+        setIsLoggedIn(true);
+        navigate("/dashboard");
       })
       .catch((err) => {
         toast(err.response.body.msg);
@@ -32,7 +37,6 @@ export const Signin = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
   return (
     <div className="flex justify-center h-screen items-center bg-purple-300">
       <form
