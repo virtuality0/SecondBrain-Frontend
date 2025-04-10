@@ -8,27 +8,21 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="flex justify-between items-center">
+    <header className="flex justify-between items-center px-4 py-2 bg-white rounded-4xl bg-gradient-to-l from-purple-600 to-white-600">
       <div className="flex gap-x-4 items-center">
         <img src={secondBrainLogo} alt="brainLogo" />
         <h1 className="text-purple-600 font-semibold text-2xl">Second Brain</h1>
       </div>
 
-      <nav className="px-4 py-6 md:flex md:justify-end md:gap-x-6 hidden">
+      <nav className="px-4 py-4 md:flex md:justify-end md:gap-x-6 hidden">
         <Link
-          className="text-purple-600 text-xl font-semibold hover:bg-purple-600 hover:text-white-600 px-4 py-2 rounded-md"
-          to="/signup"
-        >
-          About
-        </Link>
-        <Link
-          className="text-purple-600 text-xl font-semibold hover:bg-purple-600 hover:text-white-600 px-4 py-2 rounded-md"
+          className="text-purple-600 text-xl font-semibold px-4 py-2 rounded-4xl bg-white-600 shadow-sm shadow-gray-400"
           to="/signin"
         >
           Sign In
         </Link>
         <Link
-          className="text-purple-600 text-xl font-semibold hover:bg-purple-600 hover:text-white-600 px-4 py-2 rounded-md"
+          className="text-purple-600 text-xl font-semibold px-4 py-2 rounded-4xl bg-white-600 shadow-sm shadow-gray-400"
           to="/signup"
         >
           Sign Up
@@ -52,7 +46,7 @@ export const Header = () => {
           </Link>
           <Link
             to="/signin"
-            className="text-center w-full list-none px-4 py-4 text-purple-600 text-xl font-semibold hover:bg-purple-600 hover:text-white-600 border-b-1 border-white hover:shadow-md"
+            className="text-center w-full list-none px-4 py-4 text-purple-600 text-xl font-semibold hover:bg-purple-600 hover:text-white-600 border-b-1 border-white hover:shadow-md bg-purple-600"
           >
             Sign In
           </Link>

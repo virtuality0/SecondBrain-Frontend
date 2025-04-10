@@ -10,6 +10,7 @@ export const Dashboard = () => {
   const [createContentSubmitClicked, setCreateContentSubmitClicked] =
     useState<boolean>(false);
   const [brainHashReceived, setBrainHashReceived] = useState<boolean>(false);
+  const [sidebarItemClicked, setSidebarItemClicked] = useState<boolean>(false);
 
   return (
     <>
@@ -29,12 +30,13 @@ export const Dashboard = () => {
         }}
         setCreateContentSubmitClicked={setCreateContentSubmitClicked}
       />
-      <div className="flex h-full">
-        <Sidebar />
+      <div className="flex h-full w-full">
+        <Sidebar setSidebarItemClicked={setSidebarItemClicked} />
         <DashboardContent
           setCreateContentModal={setCreateContentModal}
           setShareBrainModal={setShareBrainModal}
           createContentSubmitClicked={createContentSubmitClicked}
+          sidebarItemClicked={sidebarItemClicked}
         />
       </div>
     </>

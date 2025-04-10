@@ -1,21 +1,28 @@
-import brainIcon from "../assets/images/brainIcon.svg";
 import { Header } from "./Header";
+import landingPagePic from "../assets/images/landingPageImage.jpg";
 
 export const LandingPage = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <div className="bg-purple-600 flex grow items-center">
-        <img className="w-[30%]" src={brainIcon} alt="Second brain icon" />
-        <div className="flex flex-col gap-y-6 py-30 px-10">
-          <h1 className="text-white-600 font-semibold text-3xl">
-            Second Brain
-          </h1>
-          <p className="text-white-600 w-[60%]">
-            Second brain is an application that lets you keep track of any
-            article, youtube video, a tweet or any link that you encountered but
-            don't have time to look at it now.
-          </p>
+    <div className={`flex justify-center items-center h-screen`}>
+      <div className="bg-gradient-to-t from-purple-600 to-white-600 flex flex-col h-[85%] gap-y-6 bg-white w-[85%] shadow-xl shadow-gray-400 rounded-md px-2 py-6">
+        <Header />
+        <div className="px-4 py-4 flex gap-x-4">
+          <div className="flex flex-col gap-y-4">
+            <h1 className="px-4 py-2 text-5xl font-semibold text-purple-600">
+              Save it now, see it later...
+            </h1>
+            <p className="text-white font-medium text-lg px-4 py-2">
+              The simplest way to save and organize links, tweets, and videos
+              you'll want later.
+            </p>
+          </div>
+          <div>
+            <img
+              className="w-96 rounded-md"
+              src={landingPagePic}
+              alt="Lady thinking"
+            />
+          </div>
         </div>
       </div>
     </div>

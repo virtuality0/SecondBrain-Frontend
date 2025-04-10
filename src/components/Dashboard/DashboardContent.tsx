@@ -7,22 +7,25 @@ import { axiosApi } from "../../utils/axiosConfig";
 import { Button } from "../ui/Button";
 import { AddIcon } from "../../icons/AddIcon";
 import { ShareIcon } from "../../icons/ShareIcon";
+import { useLocation } from "react-router-dom";
 
 interface DashboardContentComponentProps {
   setCreateContentModal: (createContentModal: boolean) => void;
   setShareBrainModal: (shareBrainModal: boolean) => void;
   createContentSubmitClicked: boolean;
+  sidebarItemClicked: boolean;
 }
 
 export const DashboardContent = ({
   createContentSubmitClicked,
   setCreateContentModal,
   setShareBrainModal,
+  sidebarItemClicked,
 }: DashboardContentComponentProps) => {
   const [deletecardClicked, setDeleteCardClicked] = useState(false);
   const fetchContent = async () => {
     const response = await axiosApi.get<{ content: Content[] }>(
-      "/content/getAll",
+      `/content/getAll?type=${type}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,10 +40,21 @@ export const DashboardContent = ({
     return response.data;
   };
 
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const type = params.get("type") || "all";
+
   const { data, error } = useQuery({
-    queryKey: ["content", deletecardClicked, createContentSubmitClicked],
+    queryKey: [
+      "content",
+      deletecardClicked,
+      createContentSubmitClicked,
+      sidebarItemClicked,
+      type,
+    ],
     queryFn: fetchContent,
     refetchOnWindowFocus: false, // to prevent react query to refetch the data when I switch tabs/apps
+    staleTime: 0,
   });
 
   return (

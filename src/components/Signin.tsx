@@ -26,7 +26,7 @@ export const Signin = ({ setIsLoggedIn }: SigninComponentProps) => {
         toast(response.data.msg);
         localStorage.setItem("token", response.data.token);
         setIsLoggedIn(true);
-        navigate("/dashboard");
+        navigate("/content");
       })
       .catch((err) => {
         toast(err.response.body.msg);
@@ -45,7 +45,9 @@ export const Signin = ({ setIsLoggedIn }: SigninComponentProps) => {
       >
         <div className="border-2 border-gray-200 md:w-[40%] w-[90%] rounded-lg px-8 py-6 flex flex-col gap-y-6 bg-offWhite justify-around">
           <div className="flex flex-col items-center">
-            <h1 className="text-purple-600 text-3xl font-semibold">Hello</h1>
+            <h1 className="text-purple-600 text-3xl font-semibold">
+              Welcome back,
+            </h1>
             <p className="text-lg">Sign in to your account</p>
           </div>
           <div className="flex flex-col gap-y-6">

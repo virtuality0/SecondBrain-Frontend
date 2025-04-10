@@ -48,7 +48,7 @@ export const CreateContentModal = ({
   const [addContentForm, setAddContentForm] = useState({
     title: "",
     url: "",
-    type: "",
+    type: "youtube",
   });
 
   return (
@@ -69,16 +69,22 @@ export const CreateContentModal = ({
             <form action={onSubmitClickHandler}>
               <div className="flex flex-col gap-y-4">
                 <div className="flex flex-col gap-y-4">
-                  <LabelledInput
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  <select
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                       setAddContentForm({
                         ...addContentForm,
                         type: e.target.value,
                       });
                     }}
+                    className="px-1 py-2 border-2 rounded-md border-gray-200 text-[#808080]"
+                    id="type"
+                    name="type"
                     value={addContentForm.type}
-                    placeholder="type"
-                  />
+                  >
+                    <option value="youtube">youtube</option>
+                    <option value="tweet">tweet</option>
+                    <option value="link">link</option>
+                  </select>
                   <LabelledInput
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       setAddContentForm({

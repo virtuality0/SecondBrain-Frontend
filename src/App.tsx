@@ -21,7 +21,7 @@ function App() {
       />
       <Routes>
         <Route
-          path="/dashboard"
+          path="/content"
           element={
             isLoggedIn ? ( // to check if the user's logged in only then show the dashboard
               <Dashboard />
