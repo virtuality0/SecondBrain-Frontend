@@ -14,6 +14,7 @@ interface DashboardContentComponentProps {
   setShareBrainModal: (shareBrainModal: boolean) => void;
   createContentSubmitClicked: boolean;
   sidebarItemClicked: boolean;
+  setSidebarItemClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const DashboardContent = ({
@@ -21,6 +22,7 @@ export const DashboardContent = ({
   setCreateContentModal,
   setShareBrainModal,
   sidebarItemClicked,
+  setSidebarItemClicked,
 }: DashboardContentComponentProps) => {
   const [deletecardClicked, setDeleteCardClicked] = useState(false);
   const fetchContent = async () => {
@@ -63,6 +65,7 @@ export const DashboardContent = ({
         <DashboardHeader
           setCreateContentModal={setCreateContentModal}
           setShareBrainModal={setShareBrainModal}
+          setSidebarItemClicked={setSidebarItemClicked}
         />
         {error && <div>Error fetching content.</div>}
         <div className="flex flex-col gap-y-4 px-2 py-2">

@@ -37,6 +37,7 @@ export const Dashboard = () => {
           setShareBrainModal={setShareBrainModal}
           createContentSubmitClicked={createContentSubmitClicked}
           sidebarItemClicked={sidebarItemClicked}
+          setSidebarItemClicked={setSidebarItemClicked}
         />
       </div>
     </>

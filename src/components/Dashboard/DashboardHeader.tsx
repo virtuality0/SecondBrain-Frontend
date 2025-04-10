@@ -14,11 +14,13 @@ import brainIcon from "../../assets/images/BrainIcon.png";
 interface DashboardHeaderComponentProps {
   setCreateContentModal: (createContentModal: boolean) => void;
   setShareBrainModal: (shareBrainModal: boolean) => void;
+  setSidebarItemClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const DashboardHeader = ({
   setShareBrainModal,
   setCreateContentModal,
+  setSidebarItemClicked,
 }: DashboardHeaderComponentProps) => {
   const navigate = useNavigate();
   const signoutClickHandler = () => {
@@ -84,6 +86,7 @@ export const DashboardHeader = ({
                 ></img>
               }
               text="Tweets"
+              setSidebarItemClicked={setSidebarItemClicked}
             />
             <SidebarItem
               icon={
@@ -94,12 +97,21 @@ export const DashboardHeader = ({
                 ></img>
               }
               text="Videos"
+              setSidebarItemClicked={setSidebarItemClicked}
             />
             <SidebarItem
               icon={
                 <img className="w-[8%]" src={linkIcon} alt="link icon"></img>
               }
               text="Links"
+              setSidebarItemClicked={setSidebarItemClicked}
+            />
+            <SidebarItem
+              icon={
+                <img className="w-[8%]" src={linkIcon} alt="link icon"></img>
+              }
+              text="All Content"
+              setSidebarItemClicked={setSidebarItemClicked}
             />
             <Button
               onClick={signoutClickHandler}
